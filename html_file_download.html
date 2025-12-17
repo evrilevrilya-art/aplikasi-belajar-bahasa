@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyglotPro - Belajar 5 Bahasa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🌍 PolyglotPro</h1>
+                <p>Master 5 Languages</p>
+            </div>
+            <div class="subscription-status" id="subscriptionStatus">
+                <span class="badge free">Free</span>
+            </div>
+        </header>
+
+        <!-- Subscription Banner -->
+        <div class="subscription-banner" id="subscriptionBanner">
+            <div class="banner-content">
+                <h2>🎯 Upgrade ke Premium!</h2>
+                <p>Akses unlimited semua bahasa & fitur audio tanpa batas</p>
+                <ul class="benefits">
+                    <li>✅ Akses 5 Bahasa Lengkap</li>
+                    <li>✅ Audio Pronunciation</li>
+                    <li>✅ 500+ Vocabulary</li>
+                    <li>✅ Quiz & Progress Tracking</li>
+                </ul>
+                <button class="btn-premium" onclick="showSubscriptionModal()">
+                    Berlangganan Sekarang - Rp 99.000/bulan
+                </button>
+            </div>
+        </div>
+
+        <!-- Language Selection -->
+        <section class="language-selection">
+            <h2>Pilih Bahasa yang Ingin Dipelajari</h2>
+            <div class="language-grid" id="languageGrid">
+                <div class="language-card" onclick="selectLanguage('english')">
+                    <div class="flag">🇬🇧</div>
+                    <h3>English</h3>
+                    <p>Bahasa Inggris</p>
+                    <span class="badge-lang free-lang">Free</span>
+                </div>
+                <div class="language-card locked" onclick="checkSubscription('arabic')">
+                    <div class="flag">🇸🇦</div>
+                    <h3>Arabic</h3>
+                    <p>Bahasa Arab</p>
+                    <span class="badge-lang premium-lang">Premium</span>
+                    <div class="lock-overlay">🔒</div>
+                </div>
+                <div class="language-card locked" onclick="checkSubscription('japanese')">
+                    <div class="flag">🇯🇵</div>
+                    <h3>Japanese</h3>
+                    <p>Bahasa Jepang</p>
+                    <span class="badge-lang premium-lang">Premium</span>
+                    <div class="lock-overlay">🔒</div>
+                </div>
+                <div class="language-card locked" onclick="checkSubscription('russian')">
+                    <div class="flag">🇷🇺</div>
+                    <h3>Russian</h3>
+                    <p>Bahasa Rusia</p>
+                    <span class="badge-lang premium-lang">Premium</span>
+                    <div class="lock-overlay">🔒</div>
+                </div>
+                <div class="language-card locked" onclick="checkSubscription('korean')">
+                    <div class="flag">🇰🇷</div>
+                    <h3>Korean</h3>
+                    <p>Bahasa Korea</p>
+                    <span class="badge-lang premium-lang">Premium</span>
+                    <div class="lock-overlay">🔒</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Section -->
+        <section class="learning-section" id="learningSection" style="display: none;">
+            <div class="learning-header">
+                <button class="btn-back" onclick="backToSelection()">← Kembali</button>
+                <h2 id="currentLanguageTitle"></h2>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <button class="tab-btn active" onclick="changeCategory('basic')">Dasar</button>
+                <button class="tab-btn" onclick="changeCategory('greetings')">Salam</button>
+                <button class="tab-btn" onclick="changeCategory('numbers')">Angka</button>
+                <button class="tab-btn" onclick="changeCategory('colors')">Warna</button>
+            </div>
+
+            <!-- Vocabulary List -->
+            <div class="vocabulary-list" id="vocabularyList">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <!-- Progress -->
+            <div class="progress-section">
+                <h3>Progress Belajar</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">0% - Mulai belajar sekarang!</p>
+            </div>
+        </section>
+
+        <!-- Subscription Modal -->
+        <div class="modal" id="subscriptionModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeSubscriptionModal()">&times;</span>
+                <h2>🎉 Pilih Paket Berlangganan</h2>
+                
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3>Bulanan</h3>
+                        <div class="price">Rp 99.000<span>/bulan</span></div>
+                        <ul>
+                            <li>✅ Akses 5 Bahasa</li>
+                            <li>✅ Audio Unlimited</li>
+                            <li>✅ Quiz & Games</li>
+                            <li>✅ Progress Tracking</li>
+                        </ul>
+                        <button class="btn-subscribe" onclick="subscribe('monthly')">Pilih Paket Ini</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="badge-featured">TERPOPULER</div>
+                        <h3>3 Bulan</h3>
+                        <div class="price">Rp 249.000<span>/3 bulan</span></div>
+                        <div class="discount">Hemat 16%</div>
+                        <ul>
+                            <li>✅ Semua Fitur Bulanan</li>
+                            <li>✅ Sertifikat Digital</li>
+                            <li>✅ Priority Support</li>
+                            <li>✅ Download Offline</li>
+                        </ul>
+                        <button class="btn-subscribe featured-btn" onclick="subscribe('quarterly')">Pilih Paket Ini</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3>Tahunan</h3>
+                        <div class="price">Rp 799.000<span>/tahun</span></div>
+                        <div class="discount">Hemat 33%</div>
+                        <ul>
+                            <li>✅ Semua Fitur 3 Bulan</li>
+                            <li>✅ Lifetime Updates</li>
+                            <li>✅ 1-on-1 Tutoring (2x)</li>
+                            <li>✅ Exclusive Content</li>
+                        </ul>
+                        <button class="btn-subscribe" onclick="subscribe('yearly')">Pilih Paket Ini</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal" id="successModal">
+            <div class="modal-content success-content">
+                <span class="close" onclick="closeSuccessModal()">&times;</span>
+                <div class="success-icon">✅</div>
+                <h2>Berhasil Berlangganan!</h2>
+                <p>Selamat! Akun kamu sekarang sudah Premium</p>
+                <p class="subscription-info" id="subscriptionInfo"></p>
+                <button class="btn-continue" onclick="closeSuccessModal()">Mulai Belajar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
